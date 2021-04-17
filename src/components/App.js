@@ -1,11 +1,11 @@
 import { useState } from 'react';
+import { Inputbox } from '../components/Atom/Inputbox';
 
 function App() {
   
   return (
     <div className="App">
       <header className="App-header">
-        <p>Let's Start Forme</p>
       </header>
     </div>
   );
