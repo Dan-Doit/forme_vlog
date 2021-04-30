@@ -4,7 +4,7 @@ import App from './components/App.js';
 
 import './resource/css/default.css'
 import './resource/css/normalize.css'
-import './resource/css/index.css'
+import './resource/css/style.css'
 
 
 ReactDOM.render(
