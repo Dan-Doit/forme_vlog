@@ -1,4 +1,4 @@
-import Pagination from './pagination'
+import Pagination from '../Atoms/pagination'
 
 export const Window = ({ children }) => {
   return (

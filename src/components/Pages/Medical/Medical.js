@@ -1,7 +1,7 @@
 import React from 'react'
 import MedicalTable from './MedicalTable/index'
-import { person } from '../../resource/data/person.json'
-import { death } from '../../resource/data/death.json'
+import { person } from '../../../resource/data/person.json'
+import { death } from '../../../resource/data/death.json'
 
 const genarateAge = (birth) => {
     const now = new Date().getFullYear()

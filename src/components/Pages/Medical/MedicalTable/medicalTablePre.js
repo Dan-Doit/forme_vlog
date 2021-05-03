@@ -1,4 +1,4 @@
-import { Window } from "../../Atom/Common/window";
+import { Window } from "../../../Templates/Molecules/window";
 
 const MedicalTablePre = () => {
   return (

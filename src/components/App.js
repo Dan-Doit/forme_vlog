@@ -1,4 +1,4 @@
-import Medical from './Medical/Medical.js'
+import Medical from './Pages/Medical/Medical'
 
 function App() {
   return (
