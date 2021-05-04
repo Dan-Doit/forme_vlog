@@ -123,6 +123,7 @@ button {
   transform: translate(-5px, 0) rotate(0deg);
 }
 .paginate.right {
+  margin-left: 150px;
   left: 58%;
 }
 .paginate.right i {
@@ -165,8 +166,9 @@ button {
 
 .counter {
   position: absolute;
-  width: 40px;
+  width: 100px;
   top: 50%;
+  left: -5px;
   margin-top: -15px;
   font-size: 20px;
   font-family: Helvetica, sans-serif;

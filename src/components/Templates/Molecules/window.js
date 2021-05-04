@@ -1,6 +1,8 @@
 import Pagination from '../Atoms/pagination'
 
-export const Window = ({ children }) => {
+export const Window = ({ children, peopleInfo }) => {
+  const maxpage = peopleInfo.length / 5;
+
   return (
     <div className={"window"}>
       <div className={"win-header"}>
@@ -8,7 +10,7 @@ export const Window = ({ children }) => {
       </div>
       <div className={"win-container"}>{children} </div>
       <div className={"win-footer"}>
-        <Pagination />
+        <Pagination maxpage={maxpage} />
       </div>
     </div>
   );

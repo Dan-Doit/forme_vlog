@@ -4,8 +4,8 @@ import MedicalTablePre from './medicalTablePre';
 
 const MedicalTableCon = () => {
     const peopleInfo = useContext(PersonContext)
-    console.log(peopleInfo)
-    return <MedicalTablePre/>
+    
+    return <MedicalTablePre peopleInfo={peopleInfo} />
 }
 
 export default MedicalTableCon;

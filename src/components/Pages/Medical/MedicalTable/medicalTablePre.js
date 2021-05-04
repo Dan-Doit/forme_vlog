@@ -1,9 +1,9 @@
 import { Window } from "../../../Templates/Molecules/window";
 
-const MedicalTablePre = () => {
+const MedicalTablePre = ({peopleInfo}) => {
   return (
     <>
-      <Window>
+      <Window peopleInfo={peopleInfo} >
         <p>HI</p>
       </Window>
     </>
