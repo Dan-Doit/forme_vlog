@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { PersonContext } from '../Medical'
+import Table from './Table';
 
 const MedicalTableCon = () => {
     const peopleInfo = useContext(PersonContext)
@@ -7,16 +8,32 @@ const MedicalTableCon = () => {
     const columns = React.useMemo(
         () => [
             {
-                accessor: "name",
-                Header: "Name",
+                accessor: "id",
+                Header: "Id",
             },
             {
-                accessor: "email",
-                Header: "Email",
+                accessor: "gender",
+                Header: "Gender",
             },
             {
-                accessor: "phone",
-                Header: "Phone",
+                accessor: "birth",
+                Header: "Birth",
+            },
+            {
+                accessor: "age",
+                Header: "Age",
+            },
+            {
+                accessor: "race",
+                Header: "Race",
+            },
+            {
+                accessor: "ethnicity",
+                Header: "Ethnicity",
+            },
+            {
+                accessor: "death",
+                Header: "Death",
             },
         ],
         []
@@ -24,16 +41,16 @@ const MedicalTableCon = () => {
     const data = React.useMemo(
         () => 
         peopleInfo.map((p) => ({
-            id: p.person_id,
-            gender: p.gender_source_value,
-            birth: p.birth_datetime,
+            id: p.id,
+            gender: p.gender,
+            birth: p.birth,
             age: p.age,
             race: p.race,
             ethnicity: p.ethnicity,
-            death_data: p.death_date,
+            death: p.death,
         }))
     )
-    return <p>수녕 브랜치 시작!!</p>
+    return <Table columns={columns} data={data} />
 }
 
 export default MedicalTableCon;
