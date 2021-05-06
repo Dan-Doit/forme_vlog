@@ -1,11 +1,9 @@
-import { Window } from "../../../Templates/Molecules/window";
+import { MedicalWindow } from "../../../Templates/Molecules/medicalWindow";
 
-const MedicalTablePre = ({peopleInfo}) => {
+const MedicalTablePre = ({ peopleInfo }) => {
   return (
     <>
-      <Window peopleInfo={peopleInfo} >
-        <p>HI</p>
-      </Window>
+      <MedicalWindow peopleInfo={peopleInfo} />
     </>
   );
 };

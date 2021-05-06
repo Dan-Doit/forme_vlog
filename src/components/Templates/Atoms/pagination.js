@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const Pagination = ({ page = 0, maxpage = 5 }) => {
+const Pagination = ({ page = 0, maxpage = 10 }) => {
 
   const [count, setCount] = useState(page);
 
