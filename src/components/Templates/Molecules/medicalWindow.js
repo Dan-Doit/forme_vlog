@@ -1,6 +1,7 @@
 import { GetPeopleInfo } from '../../Pages/Medical/medicalContext'
 import Pagination from '../Atoms/pagination'
 import Window from '../Atoms/window'
+import MedicalTable from './medicalTable'
 
 export const MedicalWindow = () => {
     const maxpage = GetPeopleInfo().length / 10
@@ -8,9 +9,9 @@ export const MedicalWindow = () => {
     return (
         <Window
             header={"MEDICAL"}
-            footer={<Pagination maxpage={maxpage} />}
+            // footer={<Pagination maxpage={maxpage} />}
         >
-           <p>CONTENT</p>
+           <MedicalTable />
         </Window>
     )
 }
