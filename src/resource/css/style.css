@@ -176,6 +176,12 @@ button {
   color: #fff;
 }
 
+.resource_overall_wrap {
+  display: flex;
+  height: 500px;
+  justify-content: center;
+}
+
 /* 테이브 css */
 body {
   font-family: sans-serif;
@@ -190,3 +196,4 @@ td {
   padding: 0.5rem;
   border: 1px solid black;
 }
+
