@@ -177,7 +177,16 @@ button {
 }
 
 .resource_overall_wrap {
-  display: flex;
-  height: 500px;
-  justify-content: center;
+  padding: 100px 0;
+  margin-top: 100px;
+  text-align: center;
+}
+.resource_overall {
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  width: 290px;
+  height: 290px;
+  margin: 0 30px;
+  background-color: #282c34;
 }

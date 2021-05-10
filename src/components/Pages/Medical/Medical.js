@@ -9,7 +9,7 @@ const Medical = () => {
 
     return (
         <MedicalProvider person={person} death={death}>
-            {/* <MedicalChart /> */}
+            <MedicalChart />
             <MedicalTable />
         </MedicalProvider>
     )

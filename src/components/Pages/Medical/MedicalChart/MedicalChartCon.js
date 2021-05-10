@@ -1,12 +1,12 @@
 import MedicalChartPre from './MedicalChartPre'
-import React, { useEffect } from 'react';
+import React from 'react';
 import { GetPeopleInfo } from '../medicalContext'
 
 const chartColors = {
-    cpu:"#a7c8ff",
-    memory:"#ff9c94",
-    storage:"#dfa1fb",
-    node:"#ffcd8c"
+    1:"#f2eee5",
+    2:"#e5c1c5",
+    3:"#c3e2dd",
+    4:"#6eceda"
 }
 
 const commonProperties = {
@@ -14,7 +14,7 @@ const commonProperties = {
         type: 'pie',
         plotBorderWidth: null,
         plotShadow: false,
-        backgroundColor: '#f3f4f9',
+        backgroundColor: '#282c34',
     },
     title: {
         verticalAlign: 'middle',
@@ -22,6 +22,7 @@ const commonProperties = {
         text: "Loading...",
         style: {
             fontSize: '18px',
+            color:'#ffffff'
         }
     },
     credits: {
@@ -49,84 +50,101 @@ const setTitleText = (name, inUse, total) => {
     }
 }
 
+
 const MedicalChartCon = () => {
-    // const [errShow, setErrShow] = useState(true)
 
-    let propertyList = {
-        cpu: commonProperties,
-        memory: commonProperties,
-        storage: commonProperties,
-        node: commonProperties,
-    }
-
-    // const data = GetPeopleInfo()
-
-    // useEffect(() => {
-    //     data.map()
-    // },[data])
-
-    // let isFailed = false
+    const peopleData = GetPeopleInfo()
 
     const data = {
-        resource_usage: {
-            in_use: {
-                cpu: 1444,
-                memory: 1000,
-                storage: 100,
-                node : 4,
-            },
-            total: {
-                cpu: 2000,
-                memory: 800,
-                storage: 50,
-                node : 1000,
-            }
+        medical: {
+            gender: {},
+            ethnicity: {},
+            race: {},
+            death: {}
         }
+    }
+
+    peopleData.forEach((person) => {
+        Object.entries(person).forEach(([key, value]) => {
+            switch (key) {
+                case 'gender':
+                    if (data.medical.gender[value]) {
+                        data.medical.gender[value]++
+                    } else {
+                        data.medical.gender[value] = 1
+                    }
+                    break;
+                case 'ethnicity':
+                      if (data.medical.ethnicity[value]) {
+                        data.medical.ethnicity[value]++
+                    } else {
+                        data.medical.ethnicity[value] = 1
+                    }
+                    break;
+                case 'race':
+                      if (data.medical.race[value]) {
+                        data.medical.race[value]++
+                    } else {
+                        data.medical.race[value] = 1
+                    }
+                    break;
+                case 'death':
+                      if (data.medical.death[value]) {
+                        data.medical.death[value]++
+                    } else {
+                        data.medical.death[value] = 1
+                    }
+                    break;
+                default:
+                    break;
+            }
+        })
+    })
+
+    let propertyList = {
+        gender: commonProperties,
+        ethnicity: commonProperties,
+        race: commonProperties,
+        death: commonProperties,
     }
 
     let isFailed = false
 
     if (data){
-        for (const [key, value] of Object.entries(data.resource_usage.in_use)) {
-            if (key !== "__typename") {
-                propertyList[key] = {
+        Object.entries(data.medical).forEach(([k, v]) => {
+                propertyList[k] = {
                     ...commonProperties,
                     title: {
                         ...commonProperties.title,
-                        text: setTitleText(key.toUpperCase(), value, data.resource_usage.total[key])
+                        text: setTitleText(k.toUpperCase(),1000,10)
                     },
                     series:[{
-                        name: key,
-                        data: [{
-                            name: 'used',
-                            y: data.resource_usage.in_use[key],
-                            color: chartColors[key],
+                        name: k,
+                        data: Object.entries(data.medical[k]).map(([key, value],index) => ({
+                            name: key,
+                            y: value,
+                            color: chartColors[index],
                             selected: true
-                        },
-                        {
-                            name: 'free',
-                            y: data.resource_usage.total[key] - data.resource_usage.in_use[key],
-                            color: '#e8ebf1',
-                            selected: true
-                        }]
-                    }],
-                    tooltip: {
-                        formatter: function() {
-                            let suffix = ""
-                            switch (key) {
-                                case "memory":
-                                case "storage":
-                                    suffix=" GB"
-                                    break;
-                                default:
-                                    break;
-                            }
-                            return '<strong>'+this.key+': '+this.y+suffix+'</strong>'
-                        }
-                    }
-                }
-            }
+                        }))
+                    }]
+                    
+                    // tooltip: {
+                    //     formatter: function() {
+                    //         let suffix = ""
+                    //         switch (key) {
+                    //             case "memory":
+                    //             case "storage":
+                    //                 suffix=" GB"
+                    //                 break;
+                    //             default:
+                    //                 break;
+                    //         }
+                    //         return '<strong>'+this.key+': '+this.y+suffix+'</strong>'
+                    //     }
+                    // }
         }
+
+        })
     }
 
     return (
