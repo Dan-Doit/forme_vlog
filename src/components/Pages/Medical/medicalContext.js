@@ -19,7 +19,7 @@ export const MedicalProvider = ({ children, person, death }) => {
         }
     }   
     
-        const peopleInfo = person.map(p => {
+    const peopleInfo = person.map(p => {
         return {
             id: p.person_id,
             gender: p.gender_source_value,
