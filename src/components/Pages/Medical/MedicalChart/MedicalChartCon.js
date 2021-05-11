@@ -3,10 +3,17 @@ import React from 'react';
 import { GetPeopleInfo } from '../medicalContext'
 
 const chartColors = {
-    1:"#f2eee5",
-    2:"#e5c1c5",
-    3:"#c3e2dd",
-    4:"#6eceda"
+    M:"#B8B5FF",
+    F:"#FF8882",
+    nonhispanic:"#FFCB91",
+    hispanic: "#FFEFA1",
+    white:"#FAF3E0",
+    black:"#9A8194",
+    asian: "#EABF9F",
+    native:"#C5B7BD",
+    other: "#C6A9A3",
+    생존: "#EA9A96",
+    사망:"#303960",
 }
 
 const commonProperties = {
@@ -39,16 +46,9 @@ const commonProperties = {
     },
 }
 
-const setTitleText = (name, inUse, total) => {
-    switch(name){
-        case "MEMORY":
-        case "STORAGE":
-            return '<b>'+name+'</b><br>'+inUse+"GB / "+total+"GB";
+const setTitleText = (name, total) => ('<b>' + name + '</b><br>' +
+    "<p style='font-size:15px; color:#667285;'>TOTAL : " + total + "</p>")
 
-        default:
-            return '<b>'+name+'</b><br>'+inUse+" / "+total+"";
-    }
-}
 
 
 const MedicalChartCon = () => {
@@ -66,37 +66,12 @@ const MedicalChartCon = () => {
 
     peopleData.forEach((person) => {
         Object.entries(person).forEach(([key, value]) => {
-            switch (key) {
-                case 'gender':
-                    if (data.medical.gender[value]) {
-                        data.medical.gender[value]++
-                    } else {
-                        data.medical.gender[value] = 1
-                    }
-                    break;
-                case 'ethnicity':
-                      if (data.medical.ethnicity[value]) {
-                        data.medical.ethnicity[value]++
-                    } else {
-                        data.medical.ethnicity[value] = 1
-                    }
-                    break;
-                case 'race':
-                      if (data.medical.race[value]) {
-                        data.medical.race[value]++
-                    } else {
-                        data.medical.race[value] = 1
-                    }
-                    break;
-                case 'death':
-                      if (data.medical.death[value]) {
-                        data.medical.death[value]++
-                    } else {
-                        data.medical.death[value] = 1
-                    }
-                    break;
-                default:
-                    break;
+            if (data.medical[key]) {
+                if (data.medical[key][value]) {
+                    data.medical[key][value]++
+                } else {
+                    data.medical[key][value] = 1
+                }
             }
         })
     })
@@ -108,52 +83,35 @@ const MedicalChartCon = () => {
         death: commonProperties,
     }
 
-    let isFailed = false
-
     if (data){
         Object.entries(data.medical).forEach(([k, v]) => {
-                propertyList[k] = {
-                    ...commonProperties,
-                    title: {
-                        ...commonProperties.title,
-                        text: setTitleText(k.toUpperCase(),1000,10)
-                    },
-                    series:[{
-                        name: k,
-                        data: Object.entries(data.medical[k]).map(([key, value],index) => ({
-                            name: key,
-                            y: value,
-                            color: chartColors[index],
-                            selected: true
-                        }))
-                    }]
-                    
-                    // tooltip: {
-                    //     formatter: function() {
-                    //         let suffix = ""
-                    //         switch (key) {
-                    //             case "memory":
-                    //             case "storage":
-                    //                 suffix=" GB"
-                    //                 break;
-                    //             default:
-                    //                 break;
-                    //         }
-                    //         return '<strong>'+this.key+': '+this.y+suffix+'</strong>'
-                    //     }
-                    // }
-        }
-
+            propertyList[k] = {
+                ...commonProperties,
+                title: {
+                    ...commonProperties.title,
+                    text: setTitleText(k.toUpperCase(),peopleData.length)
+                },
+                series:[{
+                    name: k,
+                    data: Object.entries(data.medical[k]).map(([key, value]) => ({
+                        name: key,
+                        y: value,
+                        color: chartColors[key],
+                        selected: true
+                    }))
+                }],
+                tooltip: {
+                    formatter: function() {
+                        let suffix = " 명"
+                        return '<strong>'+this.key+': '+this.y+suffix+'</strong>'
+                    }
+                }
+            }
         })
     }
 
     return (
         <>
-            <button type="button" className={"resource_refresh_btn "+ isFailed?"failed":""}
-                onClick={(e)=>{
-                    e.stopPropagation()
-                }} >
-            </button>
             <div className="resource_overall_wrap">
                 {Object.entries(propertyList).map(([key, value]) => {
                     return <MedicalChartPre key={"resource_pie_"+key} property={value} />
