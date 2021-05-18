@@ -8,8 +8,8 @@ export const Search = ({ onSubmit }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <input name='filter' />
-            <button>search</button>
+            <input name='filter' className="search-input" />
+            <button className="search-button">search</button>
         </form>
     )
 }

@@ -27,7 +27,9 @@ function Table({ columns, data }) {
 
     return (
         <>
-            <Search onSubmit={setGlobalFilter} />
+            <div className="search">
+                <Search onSubmit={setGlobalFilter} />
+            </div>
             <table {...getTableProps()}>
                 <thead>
                     {headerGroups.map((headerGroup) => (
@@ -55,7 +57,10 @@ function Table({ columns, data }) {
                 <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
                 {'<<'}
                 </button>{' '}
-                <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+                <button onClick={() => {
+                    previousPage()
+                    console.log('testtest')
+                }} disabled={!canPreviousPage}>
                 {'<'}
                 </button>{' '}
                 <button onClick={() => nextPage()} disabled={!canNextPage}>
@@ -73,6 +78,7 @@ function Table({ columns, data }) {
                 <span>
                 | Go to page:{' '}
                 <input
+                    className="gotopage"
                     type="number"
                     defaultValue={pageIndex + 1}
                     onChange={e => {
@@ -83,6 +89,7 @@ function Table({ columns, data }) {
                 />
                 </span>{' '}
                 <select
+                className="pagination-select"
                 value={pageSize}
                 onChange={e => {
                     setPageSize(Number(e.target.value))
