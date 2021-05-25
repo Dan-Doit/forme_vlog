@@ -48,7 +48,7 @@ export const MedicalTable = () => {
             ethnicity: p.ethnicity,
             death: p.death,
         }))
-    )
+    ,[peopleInfo])
     return <Table columns={columns} data={data} />
 }
 
