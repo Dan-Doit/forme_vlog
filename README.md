@@ -4,8 +4,8 @@
 
 ##### Step1. Install
 
-- npm install
 - npm install yarn
+- yarn install
 
 - yarn add highcharts
 - yarn add highcharts-react-official
