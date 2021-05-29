@@ -9,7 +9,7 @@ function App() {
       </header>
       <Switch>
         <Route path="/" component={Medical} event />
-        <Redirect path="*" component={Medical} />
+        <Redirect path="*" to="/" component={Medical} />
       </Switch>
     </div>
   );

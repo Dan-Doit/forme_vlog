@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTable, useGlobalFilter, useSortBy, usePagination } from 'react-table';
+import MultiSelectBox from '../../Templates/Atoms/selectbox'
 import Search from './Search'
 
 function Table({ columns, data }) {
@@ -29,6 +30,9 @@ function Table({ columns, data }) {
         <>
             <div className="search">
                 <Search onSubmit={setGlobalFilter} />
+            </div>
+            <div style={{marginLeft:'300px',marginBottom:'10px'}}>
+                <MultiSelectBox />
             </div>
             <table {...getTableProps()}>
                 <thead>
